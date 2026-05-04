@@ -1,0 +1,6 @@
+.DS_Store
+.swift-module-cache/
+.UsageBubbleHost
+*.log
+usage.json
+node_modules/
