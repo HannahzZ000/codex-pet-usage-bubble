@@ -25,18 +25,18 @@ private struct PetBounds {
 }
 
 private enum UsagePose: String {
-    case standing = "standing"
-    case sittingLaptop = "sitting-laptop"
-    case proneLaptop = "prone-laptop"
-    case phone = "phone"
-    case sleeping = "sleeping"
+    case state1 = "state1"
+    case state2 = "state2"
+    case state3 = "state3"
+    case state4 = "state4"
+    case state5 = "state5"
 
     static func from(percent: Int) -> UsagePose {
-        if percent <= 0 { return .sleeping }
-        if percent < 25 { return .phone }
-        if percent < 50 { return .proneLaptop }
-        if percent < 75 { return .sittingLaptop }
-        return .standing
+        if percent <= 0 { return .state5 }
+        if percent < 25 { return .state4 }
+        if percent < 50 { return .state3 }
+        if percent < 75 { return .state2 }
+        return .state1
     }
 }
 
@@ -64,7 +64,7 @@ private final class UsageBubbleView: NSView {
         }
     }
 
-    private var pose: UsagePose = .sleeping
+    private var pose: UsagePose = .state5
     private var images: [UsagePose: NSImage] = [:]
 
     override init(frame frameRect: NSRect) {
@@ -80,7 +80,7 @@ private final class UsageBubbleView: NSView {
     }
 
     private func loadImages() {
-        for pose in [UsagePose.standing, .sittingLaptop, .proneLaptop, .phone, .sleeping] {
+        for pose in [UsagePose.state1, .state2, .state3, .state4, .state5] {
             let path = "\(assetDir)/\(pose.rawValue).png"
             images[pose] = NSImage(contentsOfFile: path)
         }

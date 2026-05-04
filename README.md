@@ -91,6 +91,24 @@ One-shot sync from Codex logs:
 node scripts/sync-codex-usage.mjs --once
 ```
 
+## Custom Sprites
+
+Replace the PNG files in `assets/` with your own transparent-background sprites:
+
+```text
+assets/state1.png  # 100%-75% remaining
+assets/state2.png  # 74%-50% remaining
+assets/state3.png  # 49%-25% remaining
+assets/state4.png  # 24%-1% remaining
+assets/state5.png  # 0% remaining
+```
+
+Keep the filenames the same, then reinstall:
+
+```sh
+CODEX_PET_ID=your-pet-name ./scripts/install.sh
+```
+
 ## Uninstall
 
 ```sh
