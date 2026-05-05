@@ -15,6 +15,12 @@ ASSET_DIR="$INSTALL_DIR/assets"
 LAUNCH_DIR="$HOME/Library/LaunchAgents"
 HOST_LABEL="com.codex-pet.usage-bubble.$PET_ID.host"
 SYNC_LABEL="com.codex-pet.usage-bubble.$PET_ID.sync"
+NODE_BIN="${NODE_BIN:-$(command -v node)}"
+
+if [[ -z "$NODE_BIN" ]]; then
+  echo "Could not find node. Install Node.js or set NODE_BIN=/path/to/node." >&2
+  exit 1
+fi
 
 mkdir -p "$BIN_DIR" "$ASSET_DIR" "$LAUNCH_DIR" "$ROOT/.swift-module-cache"
 
@@ -58,8 +64,7 @@ cat > "$LAUNCH_DIR/$SYNC_LABEL.plist" <<PLIST
   <key>Label</key><string>$SYNC_LABEL</string>
   <key>ProgramArguments</key>
   <array>
-    <string>/usr/bin/env</string>
-    <string>node</string>
+    <string>$NODE_BIN</string>
     <string>$BIN_DIR/sync-codex-usage.mjs</string>
   </array>
   <key>EnvironmentVariables</key>
